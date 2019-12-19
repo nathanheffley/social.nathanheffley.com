@@ -7,6 +7,8 @@ Route::get('/inbox', function () {
     return response();
 })->name('inbox');
 
+Route::get('/.well-known/webfinger', 'WebfingerController@show');
+
 Auth::routes([
     'register' => false,
     'reset' => false,

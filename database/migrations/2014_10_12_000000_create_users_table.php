@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username')->unique();
             $table->string('password');
+            $table->text('private_key')->nullable();
+            $table->text('public_key')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -9,28 +9,13 @@ class ActorController
 {
     public function show(Request $request)
     {
-        $actor = User::first();
+        /** @var User $user */
+        $user = User::first();
 
         if ($request->wantsJson()) {
-            return response()->json([
-                '@context' => [
-                    'https://www.w3.org/ns/activitystreams',
-                    'https://w3id.org/security/v1',
-                ],
-
-                'id' => route('actor'),
-                'type' => 'Person',
-                'preferredUsername' => $actor->preferred_username,
-                'inbox' => route('inbox'),
-
-                'publicKey' => [
-                    'id' => route('actor') . '#public-key',
-                    'owner' => route('actor'),
-                    'publicKeyPem' => '',
-                ],
-            ]);
+            return response()->json($user->toActor());
         }
 
-        return view('actor', ['actor' => $actor]);
+        return view('actor', ['actor' => $user]);
     }
 }
