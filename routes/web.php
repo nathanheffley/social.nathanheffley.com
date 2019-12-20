@@ -2,10 +2,7 @@
 
 Route::get('/', 'ActorController@show')->name('actor');
 
-// TODO: Implement Inbox
-Route::get('/inbox', function () {
-    return response();
-})->name('inbox');
+Route::post('/inbox', 'InboxController@store')->name('inbox');
 
 Route::get('/.well-known/webfinger', 'WebfingerController@show');
 
