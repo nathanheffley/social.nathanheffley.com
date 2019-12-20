@@ -85,6 +85,6 @@ class InboxController
             ],
         ]);
 
-        return response();
+        return response()->json();
     }
 }
