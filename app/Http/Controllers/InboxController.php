@@ -41,6 +41,50 @@ class InboxController
             ], 404);
         }
 
+        /** @var \App\User $user */
+        $user = \App\User::first();
+
+        $client = new \GuzzleHttp\Client();
+
+        $actor = json_decode($client->get($request->get('actor'), [
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+        ])->getBody()->getContents());
+        dd($request->json()->all());
+
+        $date = new DateTime('UTC');
+        $headers = [
+            '(request-target)' => 'post ' . parse_url($actor->inbox, PHP_URL_PATH),
+            'Date' => $date->format('D, d M Y H:i:s \G\M\T'),
+            'Host' => parse_url($actor->inbox, PHP_URL_HOST),
+            'Content-Type' => 'application/activity+json',
+        ];
+
+        $stringToSign = implode("\n", array_map(function($k, $v){
+            return strtolower($k).': '.$v;
+        }, array_keys($headers), $headers));
+
+        $signedHeaders = implode(' ', array_map('strtolower', array_keys($headers)));
+
+        $key = openssl_pkey_get_private($user->private_key);
+        openssl_sign($stringToSign, $signature, $key, OPENSSL_ALGO_SHA256);
+        $signature = base64_encode($signature);
+        $signatureHeader = 'keyId="' . route('actor') .'",headers="'.$signedHeaders.'",algorithm="rsa-sha256",signature="'.$signature.'"';
+
+        unset($headers['(request-target)']);
+
+        $headers['Signature'] = $signatureHeader;
+
+        $client->post($actor->inbox, [
+            'headers' => $headers,
+            'json' => [
+                '@context' => 'https://www.w3.org/ns/activitystreams',
+                'type' => 'Accept',
+                'object' => $request->json()->all(),
+            ],
+        ]);
+
         return response();
     }
 }
