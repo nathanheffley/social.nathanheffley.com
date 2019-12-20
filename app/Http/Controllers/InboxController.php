@@ -51,7 +51,6 @@ class InboxController
                 'Accept' => 'application/json',
             ],
         ])->getBody()->getContents());
-        dd($request->json()->all());
 
         $date = new DateTime('UTC');
         $headers = [
