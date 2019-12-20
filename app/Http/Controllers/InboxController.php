@@ -20,7 +20,7 @@ class InboxController
             case 'Follow':
                 return $this->follow($request);
             default:
-                \Log::debug('Unknown requets received', [
+                \Log::debug('Unknown request received', [
                     'data' => $request,
                 ]);
                 return response()->json();
