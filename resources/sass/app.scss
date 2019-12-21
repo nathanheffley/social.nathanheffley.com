@@ -6,3 +6,8 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.nav-tabs .nav-link.active {
+    background-color: #fff;
+    border-bottom-color: #fff;
+}

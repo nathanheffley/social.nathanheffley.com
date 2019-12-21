@@ -11356,3 +11356,8 @@ a.text-dark:focus {
   }
 }
 
+.nav-tabs .nav-link.active {
+  background-color: #fff;
+  border-bottom-color: #fff;
+}
+
