@@ -9,7 +9,7 @@ class FollowersController
 {
     public function index(Request $request)
     {
-        $route = route('actor') . '/following';
+        $route = route('actor') . '/followers';
 
         $followers = Follower::orderBy('created_at', 'ASC')->get();
 
