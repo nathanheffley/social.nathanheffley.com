@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Follower;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -41,6 +42,10 @@ class InboxController
                 'message' => 'Unknown actor',
             ], 404);
         }
+
+        Follower::firstOrCreate([
+            'actor' => $request->get('actor'),
+        ]);
 
         /** @var \App\User $user */
         $user = \App\User::first();

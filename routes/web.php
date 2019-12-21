@@ -2,6 +2,7 @@
 
 Route::get('/', 'ActorController@show')->name('actor');
 
+Route::get('/followers', 'FollowersController@index')->name('followers');
 Route::post('/inbox', 'InboxController@store')->name('inbox');
 
 Route::get('/.well-known/webfinger', 'WebfingerController@show');
