@@ -54,7 +54,7 @@ class InboxController
             ],
         ])->getBody()->getContents());
 
-        \Log::debug($actor);
+        \Log::debug(json_encode($actor));
 
         Follower::firstOrCreate([
             'actor' => $request->get('actor'),
