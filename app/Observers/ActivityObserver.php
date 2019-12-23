@@ -54,7 +54,7 @@ class ActivityObserver
                     'headers' => $headers,
                     'json' => $activity->toObject(),
                 ]);
-                \Log::debug($response);
+                \Log::debug(json_encode($response));
             });
         }
     }
