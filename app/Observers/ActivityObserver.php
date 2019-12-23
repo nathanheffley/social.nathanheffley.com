@@ -50,6 +50,11 @@ class ActivityObserver
 
                 $headers['Signature'] = $signatureHeader;
 
+                \Log::debug('About to post note', [
+                    'inbox' => $inbox,
+                    'headers' => $headers,
+                    'json' => $activity->toObject(),
+                ]);
                 $response = $client->post($inbox, [
                     'headers' => $headers,
                     'json' => $activity->toObject(),
