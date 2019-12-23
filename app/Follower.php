@@ -14,5 +14,7 @@ class Follower extends Model
 
     protected $fillable = [
         'actor',
+        'inbox',
+        'shared_inbox',
     ];
 }
