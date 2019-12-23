@@ -50,10 +50,11 @@ class ActivityObserver
 
                 $headers['Signature'] = $signatureHeader;
 
-                $client->post($inbox, [
+                $response = $client->post($inbox, [
                     'headers' => $headers,
                     'json' => $activity->toObject(),
                 ]);
+                \Log::debug($response);
             });
         }
     }
