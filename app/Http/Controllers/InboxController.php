@@ -16,11 +16,11 @@ class InboxController
             ], 400);
         }
 
-        \Log::debug($request);
-
         switch ($request->get('type')) {
             case 'Follow':
                 return $this->follow($request);
+            case 'Undo':
+                return $this->undo($request);
             default:
                 \Log::debug('Unknown request received', [
                     'data' => $request,
@@ -91,6 +91,34 @@ class InboxController
                 'object' => $request->json()->all(),
             ],
         ]);
+
+        return response()->json();
+    }
+
+    protected function undo(Request $request)
+    {
+        if (empty($request->get('object'))) {
+            return response()->json([
+                'message' => 'Request to undo must contain an object',
+            ], 400);
+        }
+
+        $object = $request->get('object');
+
+        if ($object['type'] !== 'Follow') {
+            \Log::debug('Unknown Undo object type request received', [
+                'data' => $request,
+            ]);
+            return response()->json();
+        }
+
+        if (empty($object['actor'])) {
+            return response()->json([
+                'message' => 'Request to undo follow must contain an actor',
+            ], 400);
+        }
+
+        Follower::where('actor', $object['actor'])->delete();
 
         return response()->json();
     }
