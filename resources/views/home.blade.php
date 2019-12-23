@@ -8,6 +8,28 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Post</div>
+                <div class="card-body">
+                    <form method="POST" action="/home/post">
+                        @csrf
+
+                        <div class="d-flex flex-column">
+                            <label for="content">Content</label>
+                            <textarea id="content" name="content" class="form-control @error('content') is-invalid @enderror" rows="5"></textarea>
+
+                            @error('content')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="float-right mt-4 btn btn-outline-primary">Post</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="card @if(empty($user->public_key) || empty($user->private_key)) border-danger @endif">
                 <div class="card-header">Public/Private Keys</div>
 
@@ -18,7 +40,7 @@
 
                         <div class="d-flex flex-column">
                             <label for="public_key">Public Key</label>
-                            <textarea id="public_key" name="public_key" class="form-control @error('public_key')is-invalid @enderror" rows="9">{{ $user->public_key }}</textarea>
+                            <textarea id="public_key" name="public_key" class="form-control @error('public_key') is-invalid @enderror" rows="9">{{ $user->public_key }}</textarea>
 
                             @error('public_key')
                                 <span class="invalid-feedback" role="alert">

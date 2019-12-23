@@ -43,10 +43,6 @@ class InboxController
             ], 404);
         }
 
-        Follower::firstOrCreate([
-            'actor' => $request->get('actor'),
-        ]);
-
         /** @var \App\User $user */
         $user = \App\User::first();
 
@@ -57,6 +53,12 @@ class InboxController
                 'Accept' => 'application/json',
             ],
         ])->getBody()->getContents());
+
+        Follower::firstOrCreate([
+            'actor' => $request->get('actor'),
+            'inbox' => $actor->inbox,
+            'shared_inbox' => empty($actor->endpoints->sharedInbox) ? null : $actor->endpoints->sharedInbox,
+        ]);
 
         $date = new DateTime('UTC');
         $headers = [
