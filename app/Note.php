@@ -34,16 +34,17 @@ class Note extends Model
     public function toObject()
     {
         return [
-            '@context' => 'https://www.w3.org/ns/activitystreams',
+//            '@context' => 'https://www.w3.org/ns/activitystreams',
             'id' => route('note', ['note' => $this]),
             'type' => 'Note',
             'published' => $this->published_at,
             'attributedTo' => $this->attributed_to,
-            'inReplyTo' => $this->in_reply_to,
+//            'inReplyTo' => $this->in_reply_to,
+            'inReplyTo' => 'https://mastodon.social/@nathanheffley/103354503200052576',
             'content' => $this->content,
-            'attachment' => $this->attachment,
+//            'attachment' => $this->attachment,
             'to' => $this->to,
-            'cc' => $this->cc,
+//            'cc' => $this->cc,
         ];
     }
 }
