@@ -7,7 +7,6 @@ use App\Follower;
 use App\User;
 use DateTime;
 use GuzzleHttp\Client;
-use Illuminate\Support\Collection;
 
 class ActivityObserver
 {

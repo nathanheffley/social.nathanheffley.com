@@ -31,19 +31,18 @@ class Note extends Model
         'published_at',
     ];
 
-    public function toObject()
+    public function toObject($meta)
     {
-        return [
-//            '@context' => 'https://www.w3.org/ns/activitystreams',
+        return array_merge($meta, [
             'id' => route('note', ['note' => $this]),
             'type' => 'Note',
             'published' => $this->published_at,
             'attributedTo' => $this->attributed_to,
-            'inReplyTo' => $this->in_reply_to,
+            'inReplyTo' => $this->in_reply_to ?: null,
             'content' => $this->content,
             'attachment' => $this->attachment,
             'to' => $this->to,
             'cc' => $this->cc,
-        ];
+        ]);
     }
 }

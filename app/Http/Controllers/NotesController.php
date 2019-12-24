@@ -8,6 +8,6 @@ class NotesController extends Controller
 {
     public function show(Note $note)
     {
-        return response()->json($note->toObject());
+        return response()->json($note->toObject(['@context' => 'https://www.w3.org/ns/activitystreams']));
     }
 }
