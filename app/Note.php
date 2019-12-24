@@ -31,7 +31,7 @@ class Note extends Model
         'published_at',
     ];
 
-    public function toObject($meta)
+    public function toObject($meta = [])
     {
         return array_merge($meta, [
             'id' => route('note', ['note' => $this]),
