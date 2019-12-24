@@ -39,12 +39,11 @@ class Note extends Model
             'type' => 'Note',
             'published' => $this->published_at,
             'attributedTo' => $this->attributed_to,
-//            'inReplyTo' => $this->in_reply_to,
-            'inReplyTo' => 'https://mastodon.social/@nathanheffley/103354503200052576',
+            'inReplyTo' => $this->in_reply_to,
             'content' => $this->content,
-//            'attachment' => $this->attachment,
+            'attachment' => $this->attachment,
             'to' => $this->to,
-//            'cc' => $this->cc,
+            'cc' => $this->cc,
         ];
     }
 }
