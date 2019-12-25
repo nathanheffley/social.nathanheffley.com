@@ -4,6 +4,7 @@ Route::get('/', 'ActorController@show')->name('actor');
 
 Route::get('/followers', 'FollowersController@index')->name('followers');
 Route::post('/inbox', 'InboxController@store')->name('inbox');
+Route::get('/outbox', 'OutboxController@index')->name('outbox');
 
 Route::get('/note/{note}', 'NotesController@show')->name('note');
 
