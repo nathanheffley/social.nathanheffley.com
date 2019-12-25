@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Note;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,8 @@ class ActorController
             return response()->json($user->toActor());
         }
 
-        return view('actor', ['actor' => $user]);
+        $notes = Note::orderBy('published_at', 'DESC')->get();
+
+        return view('actor', ['actor' => $user, 'notes' => $notes]);
     }
 }

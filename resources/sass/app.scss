@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
 // Variables
 @import 'variables';
@@ -10,4 +10,10 @@
 .nav-tabs .nav-link.active {
     background-color: #fff;
     border-bottom-color: #fff;
+}
+
+.post + .post {
+    border-top: 1px solid #dee2e6;
+    margin-top: 1rem;
+    padding-top: 1rem;
 }
